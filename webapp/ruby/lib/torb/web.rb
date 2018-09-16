@@ -69,6 +69,8 @@ module Torb
           }
 
           sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num').to_a
+          $logger.info("sheets.count: #{sheets.count}")
+          $logger.info("sheets.first: #{sheets.first}")
 
           events = event_ids.map do |event_id|
             event = get_event(event_id, nil, raw_event_hash[event_id], sheets)
@@ -102,6 +104,7 @@ module Torb
         unless sheets
           sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num')
         end
+        $logger.info("(inside) sheets.count: #{sheets.count}")
         sheets.each do |sheet|
           event['sheets'][sheet['rank']]['price'] ||= event['price'] + sheet['price']
           event['total'] += 1
