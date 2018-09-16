@@ -12,4 +12,4 @@ git pull --rebase
 rsync -az -e ssh --delete . isucon@isucon-a:torb
 # add b and c
 
-ssh isucon@isucon-a bash -c 'cd torb && exec ./script/update'
+ssh isucon@isucon-a 'cd torb && exec ./script/update'
