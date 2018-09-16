@@ -3,4 +3,7 @@ sudo systemctl restart torb.ruby
 
 echo "" | sudo tee /var/log/mariadb/general-query.log
 echo "" | sudo tee /var/log/mariadb/mysql-slow.sql
+echo "" | sudo tee /var/log/h2o/access.log
+
 sudo systemctl restart mariadb
+sudo systemctl restart h2o
