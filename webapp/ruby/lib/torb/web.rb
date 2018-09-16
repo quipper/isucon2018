@@ -62,7 +62,7 @@ module Torb
         db.query('BEGIN')
         begin
           event_ids = db.query('SELECT * FROM events ORDER BY id ASC').select(&where).map { |e| e['id'] }
-          raw_events = db.query('SELECT * FROM events').to_a
+          raw_events = db.query('SELECT * FROM events').select(&where).to_a
 
           raw_event_hash = raw_events.inject({}) {|memo, x|
             memo.merge(x['id'] => x)
