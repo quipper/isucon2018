@@ -110,6 +110,7 @@ module Torb
         reservations_hash = reservations.inject({}) {|memo, x|
           memo.merge(x['sheet_id'] => x)
         }
+        $logger.info("reservations_hash: #{reservations_hash}")
 
         sheets.each do |sheet|
           event['sheets'][sheet['rank']]['price'] ||= event['price'] + sheet['price']
