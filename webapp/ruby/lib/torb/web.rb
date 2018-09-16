@@ -80,7 +80,7 @@ module Torb
           db.query('ROLLBACK')
         end
 
-        $logger.info("get_events(#{where}): #{Time.now - t}")
+        # $logger.info("get_events(#{where}): #{Time.now - t}")
 
         events
       end
@@ -110,7 +110,7 @@ module Torb
         reservations_hash = reservations.inject({}) {|memo, x|
           memo.merge(x['sheet_id'] => x)
         }
-        $logger.info("reservations_hash: #{reservations_hash}")
+        # $logger.info("reservations_hash: #{reservations_hash}")
 
         sheets.each do |sheet|
           event['sheets'][sheet['rank']]['price'] ||= event['price'] + sheet['price']
