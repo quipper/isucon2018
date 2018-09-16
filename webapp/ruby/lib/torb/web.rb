@@ -72,7 +72,7 @@ module Torb
           db.query('ROLLBACK')
         end
 
-        $logger.info("get_events(#{where}): #{Time.now - t}"
+        $logger.info("get_events(#{where}): #{Time.now - t}")
 
         events
       end
