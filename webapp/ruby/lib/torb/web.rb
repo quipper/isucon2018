@@ -108,7 +108,7 @@ module Torb
           event['id']
         ).to_a
         reservations_hash = reservations.inject({}) {|memo, x|
-          memo.merge(x['id'] => x)
+          memo.merge(x['sheet_id'] => x)
         }
 
         sheets.each do |sheet|
