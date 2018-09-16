@@ -68,8 +68,10 @@ module Torb
             memo.merge(x['id'] => x)
           }
 
+          sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num').to_a
+
           events = event_ids.map do |event_id|
-            event = get_event(event_id, nil, raw_event_hash[event_id])
+            event = get_event(event_id, nil, raw_event_hash[event_id], sheets)
             event['sheets'].each { |sheet| sheet.delete('detail') }
             event
           end
@@ -83,7 +85,7 @@ module Torb
         events
       end
 
-      def get_event(event_id, login_user_id = nil, event = nil)
+      def get_event(event_id, login_user_id = nil, event = nil, sheets = nil)
         unless event
           event = db.xquery('SELECT * FROM events WHERE id = ?', event_id).first
           return unless event
@@ -97,7 +99,9 @@ module Torb
           event['sheets'][rank] = { 'total' => 0, 'remains' => 0, 'detail' => [] }
         end
 
-        sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num')
+        unless sheets
+          sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num')
+        end
         sheets.each do |sheet|
           event['sheets'][sheet['rank']]['price'] ||= event['price'] + sheet['price']
           event['total'] += 1
