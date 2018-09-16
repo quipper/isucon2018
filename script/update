@@ -1,0 +1,6 @@
+#!/bin/bash -ex
+sudo systemctl restart torb.ruby
+
+echo "" | sudo tee /var/log/mariadb/general-query.log
+echo "" | sudo tee /var/log/mariadb/mysql-slow.sql
+sudo systemctl restart mariadb
