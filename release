@@ -12,10 +12,4 @@ git pull --rebase
 rsync -az -e ssh --delete . isucon@isucon-a:torb
 # add b and c
 
-ssh isucon-a sudo systemctl restart torb.ruby
-
-# mariadb
-sudo echo "" | sudo tee /var/log/mariadb/general-query.log
-sudo echo "" | sudo tee /var/log/mariadb/mysql-slow.sql
-ssh isucon-a sudo systemctl restart mariadbb
-
+ssh isucon@isucon-a 'cd torb && exec ./script/update'
