@@ -104,7 +104,7 @@ module Torb
         end
 
         reservations = db.xquery(
-          'SELECT * FROM reservations WHERE event_id = ? AND canceled_at IS NULL LIMIT 1',
+          'SELECT * FROM reservations WHERE event_id = ? AND canceled_at IS NULL',
           event['id']
         ).to_a
         reservations_hash = reservations.inject({}) {|memo, x|
