@@ -442,7 +442,8 @@ module Torb
 
     get '/admin/api/reports/sales', admin_login_required: true do
       reservations = db.query('
-SELECT r.user_id, r.id, s.rank AS sheet_rank, 
+SELECT r.user_id, r.id, r.reserved_at, r.canceled_at,
+s.rank AS sheet_rank, 
 s.num AS sheet_num, 
 s.price AS sheet_price, 
 e.id AS event_id, 
