@@ -102,6 +102,15 @@ module Torb
         unless sheets
           sheets = db.query('SELECT * FROM sheets ORDER BY `rank`, num')
         end
+
+        reservations = db.xquery(
+          'SELECT * FROM reservations WHERE event_id = ? AND canceled_at IS NULL LIMIT 1',
+          event['id']
+        ).to_a
+        reservations_hash = reservations.inject({}) {|memo, x|
+          memo.merge(x['id'] => x)
+        }
+
         sheets.each do |sheet|
           event['sheets'][sheet['rank']]['price'] ||= event['price'] + sheet['price']
           event['total'] += 1
@@ -113,11 +122,12 @@ module Torb
           #   sheet['id']
           # ).first
 
-          reservation = db.xquery(
-            'SELECT * FROM reservations WHERE event_id = ? AND sheet_id = ? AND canceled_at IS NULL LIMIT 1',
-            event['id'],
-            sheet['id']
-          ).first
+          # reservation = db.xquery(
+          #   'SELECT * FROM reservations WHERE event_id = ? AND sheet_id = ? AND canceled_at IS NULL LIMIT 1',
+          #   event['id'],
+          #   sheet['id']
+          # ).first
+          reservation = reservations_hash[sheet['id']]
 
           if reservation
             sheet['mine']        = true if login_user_id && reservation['user_id'] == login_user_id
