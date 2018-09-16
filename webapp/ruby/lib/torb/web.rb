@@ -77,9 +77,11 @@ module Torb
         events
       end
 
-      def get_event(event_id, login_user_id = nil)
-        event = db.xquery('SELECT * FROM events WHERE id = ?', event_id).first
-        return unless event
+      def get_event(event_id, login_user_id = nil, event = nil)
+        unless event
+          event = db.xquery('SELECT * FROM events WHERE id = ?', event_id).first
+          return unless event
+        end
 
         # zero fill
         event['total']   = 0
