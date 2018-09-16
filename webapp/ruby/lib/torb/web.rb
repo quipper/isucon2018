@@ -114,7 +114,7 @@ module Torb
           # ).first
 
           reservation = db.xquery(
-            'SELECT * FROM reservations WHERE event_id = ? AND sheet_id = ? AND canceled_at IS NULL ORDER BY reserved_at ASC LIMIT 1',
+            'SELECT * FROM reservations WHERE event_id = ? AND sheet_id = ? AND canceled_at IS NULL LIMIT 1',
             event['id'],
             sheet['id']
           ).first
