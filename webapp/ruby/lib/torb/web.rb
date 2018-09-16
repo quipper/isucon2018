@@ -3,9 +3,9 @@ require 'sinatra/base'
 require 'erubi'
 require 'mysql2'
 require 'mysql2-cs-bind'
-require 'logger'
+# require 'logger'
 
-$logger = Logger.new("/tmp/get_events.log")
+# $logger = Logger.new("/tmp/get_events.log")
 module Torb
   class Web < Sinatra::Base
     configure :development do
