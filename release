@@ -10,8 +10,8 @@ cd isucon2018
 git pull --rebase
 
 rsync -az -e ssh --delete . isucon@isucon-a:torb
-rsync -az -e ssh --delete . isucon@isucon-b:torb
-rsync -az -e ssh --delete . isucon@isucon-c:torb
+# rsync -az -e ssh --delete . isucon@isucon-b:torb
+# rsync -az -e ssh --delete . isucon@isucon-c:torb
 # add b and c
 
 ssh isucon@isucon-a 'cd torb && exec ./script/update'
