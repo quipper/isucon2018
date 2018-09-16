@@ -1,0 +1,15 @@
+#!/bin/bash -ex
+echo 'github上のmasterブランチをisucon-aのみにreleaseします!'
+
+mkdir -p /tmp/isucon-release
+cd /tmp/isucon-release
+if [ ! -d "/tmp/isucon-release/isucon2018" ]; then
+  git clone git@github.com:quipper/isucon2018.git
+fi
+cd isucon2018
+git pull --rebase
+
+rsync -az -e ssh --delete . isucon@isucon-a:torb__
+# add b and c
+
+ssh isucon-a sudo systemctl restart torb.ruby
