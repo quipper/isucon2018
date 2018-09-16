@@ -73,7 +73,7 @@ module Torb
           $logger.info("sheets.first: #{sheets.first}")
 
           events = event_ids.map do |event_id|
-            event = get_event(event_id, nil, raw_event_hash[event_id], sheets)
+            event = get_event(event_id, nil, raw_event_hash[event_id], sheets.clone)
             event['sheets'].each { |sheet| sheet.delete('detail') }
             event
           end
