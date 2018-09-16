@@ -9,7 +9,7 @@ fi
 cd isucon2018
 git pull --rebase
 
-rsync -az -e ssh --delete . isucon@isucon-a:torb__
+rsync -az -e ssh --delete . isucon@isucon-a:torb
 # add b and c
 
 ssh isucon-a sudo systemctl restart torb.ruby
