@@ -63,7 +63,7 @@ module Torb
         begin
           events0 = db.query('SELECT * FROM events ORDER BY id ASC').select(&where)
           events = events0.map do |event0|
-            event = get_event_sat0yu(event0.id, event0)
+            event = get_event_sat0yu(event0['id'], event0)
             event['sheets'].each { |sheet| sheet.delete('detail') }
             event
           end
