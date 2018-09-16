@@ -1,6 +1,8 @@
 #!/bin/bash -ex
 
+cd webapp/ruby
 ~/local/ruby/bin/bundle
+cd -
 
 sudo systemctl restart torb.ruby
 
