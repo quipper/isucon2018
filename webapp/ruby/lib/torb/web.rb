@@ -3,7 +3,9 @@ require 'sinatra/base'
 require 'erubi'
 require 'mysql2'
 require 'mysql2-cs-bind'
+require 'logger'
 
+$logger = Logger.new("/tmp/get_events.log")
 module Torb
   class Web < Sinatra::Base
     configure :development do
@@ -56,6 +58,7 @@ module Torb
       def get_events(where = nil)
         where ||= ->(e) { e['public_fg'] }
 
+        t = Time.now
         db.query('BEGIN')
         begin
           event_ids = db.query('SELECT * FROM events ORDER BY id ASC').select(&where).map { |e| e['id'] }
@@ -68,6 +71,8 @@ module Torb
         rescue
           db.query('ROLLBACK')
         end
+
+        $logger.info("get_events(#{where}): #{Time.now - t}"
 
         events
       end
